@@ -55,7 +55,8 @@ header {
 footer {
   background: var(--dark);
   display: flex;
-  flex-flow: row-reverse;
+  align-items: center;
+  justify-content: center;
   color: var(--text-color-light);
   padding: 1.5rem;
 }
