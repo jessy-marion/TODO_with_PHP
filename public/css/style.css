@@ -1,6 +1,7 @@
 :root {
   --font-family: "Open Sans", "sans-serif";
   --primary: #ff3f34;
+  --danger: #ff3f34;
   --dark: #485460;
   --background-light: #d2dae2;
   --text-color: #444;
@@ -113,4 +114,10 @@ footer {
   border: var(--border);
   border-radius: 3px;
   padding: 10px 15px;
+}
+
+.text-danger {
+  color: var(--danger);
+  font-size: 1.2rem;
+  font-weight: bold;
 }
