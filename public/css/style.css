@@ -33,6 +33,11 @@ h1 {
   margin-bottom: 1rem;
 }
 
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+
 .container {
   font-size: 1.6rem;
   min-height: 100vh;
@@ -51,12 +56,18 @@ h1 {
   cursor: pointer;
   border-radius: 3px;
   margin: 0 5px;
+  box-shadow: var(--box-shadow);
 }
 
 .btn-primary {
   background: var(--primary);
   color: var(--text-color-light);
   border-radius: 3px;
+}
+
+.btn-small {
+  padding: 5px 10px;
+  font-size: 1.4rem;
 }
 
 header {
@@ -120,4 +131,21 @@ footer {
   color: var(--danger);
   font-size: 1.2rem;
   font-weight: bold;
+}
+
+.todo-item {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 1.5rem;
+}
+
+.todo-item:nth-child(odd) {
+  background: var(--background-light);
+}
+
+.todo-name {
+  flex: 1;
+  margin-right: 0.5rem;
 }
