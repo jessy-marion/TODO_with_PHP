@@ -12,8 +12,11 @@
 
     <div class="content">
         <div class="todo-container">
-            <h1>Ma todo</h1>
-            <div class="todo-form"></div>
+            <h1>Ma Todo</h1>
+            <form action="/" method="POST" class="todo-form">
+                <input type="text">
+                <button class="btn btn-primary">Ajouter</button>
+            </form>
             <div class="todo-list"></div>
         </div>
     </div>
