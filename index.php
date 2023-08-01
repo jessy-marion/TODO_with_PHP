@@ -3,6 +3,7 @@ const ERROR_REQUIRED = 'Veuillez renseigner une todo';
 const ERROR_TOO_SHORT = 'Veuillez entrer au moins 5 caractères';
 $filename = __DIR__ . "/data/todos.json";
 $error = '';
+$todo = "";
 $todos = [];
 
 if (file_exists($filename)) {
@@ -11,12 +12,7 @@ if (file_exists($filename)) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $_POST = filter_input_array(INPUT_POST, [
-        "todo" => [
-            "filter" => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
-            "flags" => FILTER_FLAG_NO_ENCODE_QUOTES | FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_BACKTICK
-        ]
-    ]);
+    $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $todo = $_POST['todo'] ?? '';
 
     if (!$todo) {
@@ -31,9 +27,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'done' => false,
             'id' => time()
         ]];
-        file_put_contents($filename, json_encode($todos, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+        file_put_contents($filename, json_encode($todos));
+        header("Location: /");
     }
 }
+
 ?>
 
 
@@ -53,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="todo-container">
             <h1>Ma Todo</h1>
             <form action="/" method="POST" class="todo-form">
-                <input name="todo" type="text">
+                <input value="<?= $todo ?>" name="todo" type="text">
                 <button class="btn btn-primary">Ajouter</button>
             </form>
             <?php if ($error): ?>
@@ -62,9 +60,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <ul class="todo-list">
                 <?php foreach ($todos as $t): ?>
                     <li class="todo-item">
-                        <span class="todo-name"><?= $t["name"] ?></span>
-                        <button class="btn btn-primary btn-small">Valider</button>
-                        <button class="btn btn-primary btn-small">Supprimer</button>
+                        <span class="todo-name"><?= $t['name'] ?></span>
+                        <a href="/edit-todo.php?id=<?= $t['id'] ?>">
+                            <button class="btn btn-primary btn-small">Valider</button>
+                        </a>
+                        <a href="/remove-todo.php?id=<?= $t['id'] ?>">
+                            <button class="btn btn-primary btn-small">Supprimer</button>
+                        </a>
                     </li>
                 <?php endforeach; ?>
             </ul>
@@ -76,4 +78,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 </body>
 </html>
+
+
+
+
+
 

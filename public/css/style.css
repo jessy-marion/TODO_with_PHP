@@ -38,6 +38,10 @@ ul {
   list-style-type: none;
 }
 
+a {
+  text-decoration: none;
+}
+
 .container {
   font-size: 1.6rem;
   min-height: 100vh;
@@ -148,4 +152,8 @@ footer {
 .todo-name {
   flex: 1;
   margin-right: 0.5rem;
+}
+
+.done {
+  opacity: 0.5;
 }
